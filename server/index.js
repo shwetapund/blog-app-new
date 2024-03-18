@@ -2,12 +2,14 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
+import { userHealth } from "./controllers/userController.js";
 
 const app = express();
 app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 
+//connection
 const connectMongoDB = async ()=>{
     const conn = await mongoose.connect(process.env.MONGODB_URI)
     if(conn){
@@ -15,6 +17,9 @@ const connectMongoDB = async ()=>{
     }
 }
 connectMongoDB();
+
+//apis
+app.get('/api/health',userHealth);
 
 
 app.listen(PORT, ()=>{
