@@ -2,7 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
-import { userHealth } from "./controllers/userController.js";
+import { userHealth, signupApi } from "./controllers/userController.js";
 
 const app = express();
 app.use(express.json());
@@ -20,6 +20,7 @@ connectMongoDB();
 
 //apis
 app.get('/api/health',userHealth);
+app.post('/api/v1/signup',signupApi)
 
 
 app.listen(PORT, ()=>{

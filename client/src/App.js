@@ -11,7 +11,6 @@ import Header from './components/Header';
 function App() {
   return (
     <>
-     {/* <h1 className='text-3xl text-red-500'>app</h1> */}
      <BrowserRouter>
      <Header />
      <Routes>
@@ -21,12 +20,9 @@ function App() {
       <Route path='/dashboard' element={<Dashboard />}/>
       <Route path='/signup' element={<Signup/>}/>
       <Route path='/signin' element={<SignIn />}/>
-
      </Routes>
      </BrowserRouter>
     </>
-   
   )
 }
-
 export default App
