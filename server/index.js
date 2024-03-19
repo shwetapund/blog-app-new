@@ -22,6 +22,17 @@ connectMongoDB();
 app.get('/api/health',userHealth);
 app.post('/api/v1/signup',signupApi)
 
+//middleware
+app.use((err, req, res, next) => {
+    const statusCode = err.statusCode || 500;
+    const message = err.message || 'Internal server error';
+    res.status(statusCode).json({
+        success:false,
+        statusCode,
+        message
+    })
+})
+
 
 app.listen(PORT, ()=>{
     console.log(`port is running on ${PORT}`)
