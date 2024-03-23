@@ -2,7 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
-import { userHealth, signupApi } from "./controllers/userController.js";
+import { userHealth, signupApi, signinApi } from "./controllers/userController.js";
 
 const app = express();
 app.use(express.json());
@@ -21,7 +21,7 @@ connectMongoDB();
 //apis
 app.get('/api/health',userHealth);
 app.post('/api/v1/signup',signupApi)
-
+app.post('/api/v1/signin',signinApi)
 //middleware
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;

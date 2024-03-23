@@ -1,13 +1,14 @@
 import User from "./../models/User.js";
 import bcryptjs from "bcryptjs";
 import { errorHandler } from "./../utils/error.js";
+import jwt from "jsonwebtoken";
 
 const userHealth = (req, res) => {
   res.json({
     message: "Api is working",
   });
 };
-
+//signup
 const signupApi = async (req, res, next) => {
   const { username, password, email } = req.body;
 
@@ -46,4 +47,36 @@ const signupApi = async (req, res, next) => {
   }
 };
 
-export { userHealth, signupApi };
+//login
+const signinApi = async (req,res, next)=>{
+  const {email, password} = req.body;
+
+  if(!email || !password || email === '' || password === ''){
+    next(errorHandler(400, 'All fields are required'));
+  }
+  try{
+    const validUser = await User.findOne({ email });
+    if(!validUser){
+      return next(errorHandler(404, 'user not found'));
+    }
+    const validPassword = bcryptjs.compareSync(password, validUser.password);
+    if(!validPassword){
+      return next(errorHandler(400, 'Invaild password'));
+    }
+
+    const token = jwt.sign({ id: validUser._id}, process.env.JWT_SECRET);
+
+    const { password: pass, ...rest} = validUser._doc; //password hiding code
+
+      //create a res and add or send a cookie
+      res.status(200).cookie( 'access_token', token, {
+        httpOnly: true,
+      })
+      .json(rest);   
+
+    }catch(error){
+    next(error);
+  }
+}
+
+export { userHealth, signupApi, signinApi };
