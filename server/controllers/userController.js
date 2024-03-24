@@ -3,11 +3,13 @@ import bcryptjs from "bcryptjs";
 import { errorHandler } from "./../utils/error.js";
 import jwt from "jsonwebtoken";
 
+//health 
 const userHealth = (req, res) => {
   res.json({
     message: "Api is working",
   });
 };
+
 //signup
 const signupApi = async (req, res, next) => {
   const { username, password, email } = req.body;

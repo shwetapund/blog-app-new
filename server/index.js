@@ -22,16 +22,17 @@ connectMongoDB();
 app.get('/api/health',userHealth);
 app.post('/api/v1/signup',signupApi)
 app.post('/api/v1/signin',signinApi)
+
 //middleware
-app.use((err, req, res, next) => {
-    const statusCode = err.statusCode || 500;
-    const message = err.message || 'Internal server error';
-    res.status(statusCode).json({
-        success:false,
-        statusCode,
-        message
-    })
-})
+// app.use((err, req, res, next) => {
+//     const statusCode = err.statusCode || 500;
+//     const message = err.message || 'Internal server error';
+//     res.status(statusCode).json({
+//         success:false,
+//         statusCode,
+//         message
+//     })
+// })
 
 
 app.listen(PORT, ()=>{

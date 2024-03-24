@@ -58,8 +58,8 @@ export default function SignUp() {
             Blog
           </Link>
           <p className="text-sm mt-5">
-            5etdffff fffffff ffffff fffffffff ffffff ffffffff ffffff ffffffff
-            fffffff ffffff fffff fffff ffffff ffffff
+          This is demo project. You can sign up with your email and password
+           or with Google.
           </p>
         </div>
         {/* right */}
