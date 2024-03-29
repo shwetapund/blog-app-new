@@ -76,7 +76,7 @@ const signinApi = async (req,res, next)=>{
       })
       .json(rest);   
 
-    }catch(error){
+    }catch(error){R
     next(error);
   }
 }
